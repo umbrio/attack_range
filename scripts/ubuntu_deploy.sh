@@ -1,6 +1,6 @@
 #!/bin/bash
 ## variables
-ATTACK_RANGE_URL="https://github.com/splunk/attack_range"
+ATTACK_RANGE_URL="https://github.com/umbrio/attack_range"
 ATTACK_RANGE_DIR="/opt/attack_range"
 TERRAFORM_BIN="/usr/local/bin/terraform"
 TERRAFORM_VERSION="0.14.4"
