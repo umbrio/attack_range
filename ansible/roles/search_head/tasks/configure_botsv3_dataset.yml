@@ -1,0 +1,10 @@
+- name: Export botsv3 data
+  shell: 
+    cmd: ./splunk search "index=botsv3 sourcetype={{ item }}" -output rawdata -maxout 1000000 > "/tmp/{{ item }}.txt"
+    chdir: /opt/splunk/bin/
+
+- name: Replace timestamp to current year
+  replace:
+    path: /temp/{{ item }}.txt
+    regexp: 'timestamp:  (?<timestamp>2018-08-20)'
+    replace: "{{ ansible_date_time.date }}"  
