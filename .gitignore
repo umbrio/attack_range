@@ -187,3 +187,5 @@ terraform/state/*
 !terraform/state/state.md
 
 ansible/roles/search_head/vars/splunk_cred.yml
+attack_range_shared.pem
+
