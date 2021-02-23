@@ -1,7 +1,7 @@
 - name: Export botsv3 data
   shell: 
-    cmd: ./splunk search "index=botsv3 sourcetype={{ item }}" -output rawdata -maxout 1000000 > "/tmp/{{ item }}.txt"
     chdir: /opt/splunk/bin/
+    cmd: ./splunk search "index=botsv3 sourcetype={{ item }}" -output rawdata -maxout 1000000 > "/tmp/{{ item }}.txt" -auth {{ username }}:{{ password }}
 
 - name: Replace timestamp to current year
   replace:
