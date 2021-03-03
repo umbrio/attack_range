@@ -69,10 +69,10 @@ sourcetypes_botsv3_part2:
 - unix:useraccounts
 - unix:version
 - wineventlog:application
-- wineventlog:microsoft-windows-applocker/exe and dll
-- wineventlog:microsoft-windows-applocker/packaged app-execution
-- wineventlog:microsoft-windows-powershell/operational
+- 'wineventlog:microsoft-windows-applocker/exe and dll'
+- 'wineventlog:microsoft-windows-applocker/packaged app-execution'
+- 'wineventlog:microsoft-windows-powershell/operational'
 - wineventlog:security
 - wineventlog:system
-- xmlwineventlog:microsoft-windows-sysmon/operational
+- 'xmlwineventlog:microsoft-windows-sysmon/operational'
 - yum-too_small
