@@ -4,7 +4,12 @@
     dest: /opt/splunk/etc/apps/
     owner: splunk
     group: splunk
-  notify: restart splunk
+  register: app_copy
+ 
+- name: restart splunk
+  service: name=splunk state=restarted
+  when: app_copy.changed
+  become: yes
 
 - name: Run Collect search
   uri:
@@ -13,22 +18,16 @@
     user: "admin"
     password: "{{ splunk_admin_password }}"
     validate_certs: false
-    body: "-d search=" \| savedsearch bots_collect_to_hec_file time="{{ ansible_date_time.date }} 09:00""
-    headers:
-      Content-Type: "application/x-www-form-urlencoded"
-    status_code: [ 200, 201 ]
-    timeout: 90
+    body: "search=\\" \\| savedsearch bots_collect_to_hec_file time=\\"{{ ansible_date_time.date }} 09:00\\""
+    timeout: 1200
  
 - name: checking if collect search is done
-  stat: path=/tmp/heccollect.stash_hec
-  register: hec_collect
-
-- name: is splunk installed?
-  debug: msg='HEC collect is done running'
-  when: hec_collect.stat.exists
+  wait_for: 
+    path: /tmp/heccollect.stash_hec
+    timeout: 1200
+    sleep: 10
 
 - name: Run HEC push
-  script: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
+  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
   args: 
-    executable: python3 
-  when: splunk_path.stat.exists == true
+    executable: /usr/bin/python3 
