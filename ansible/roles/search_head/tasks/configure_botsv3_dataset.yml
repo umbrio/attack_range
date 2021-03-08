@@ -1,4 +1,0 @@
-- name: Export data
-      shell:
-        chdir: /opt/splunk/bin/
-        cmd: ./splunk search "index=botsv3 sourcetype={{ item }}" -output rawdata -maxout 5000000 > "/tmp/bots/{{ item }}.txt" -auth admin:{{ splunk_admin_password }}
