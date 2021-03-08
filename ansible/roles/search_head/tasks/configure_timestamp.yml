@@ -13,13 +13,17 @@
 
 - name: Run Collect search
   uri:
-    url: "https://127.0.0.1:8089/servicesNS/admin/search/search/jobs/export"
+    url: "https://127.0.0.1:8089/servicesNS/admin/search/search/jobs"
     method: POST
+    body_format: form-urlencoded
     user: "admin"
     password: "{{ splunk_admin_password }}"
     validate_certs: false
-    body: "search=\\" \\| savedsearch bots_collect_to_hec_file time=\\"{{ ansible_date_time.date }} 09:00\\""
-    timeout: 1200
+    body:
+      search: "search \| savedsearch bots_collect_to_hec_file time=\"{{ ansible_date_time.date }} 09:00\""
+    timeout: 90
+    return_content: yes
+    status_code: 201
  
 - name: checking if collect search is done
   wait_for: 
