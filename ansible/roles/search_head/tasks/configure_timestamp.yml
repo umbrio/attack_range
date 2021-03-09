@@ -31,10 +31,10 @@
     timeout: 2800
     sleep: 10
 
-- name: Run HEC push
-  shell: 
-    chdir: /opt/splunk/etc/apps/timestamp_app/bin
-    cmd: ./hec_push.py
-    sudo: true
-    sudo_user: root
+#- name: Run HEC push
+#  shell: 
+#    chdir: /opt/splunk/etc/apps/timestamp_app/bin
+#    cmd: ./hec_push.py
+#    sudo: true
+#    sudo_user: root
   
