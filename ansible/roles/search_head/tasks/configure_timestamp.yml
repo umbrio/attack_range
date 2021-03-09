@@ -31,7 +31,12 @@
     timeout: 2800
     sleep: 10
 
+- name: copy hec push
+  copy:
+    src: hec_push.py
+    dest: /tmp/
+    
 - name: Run HEC push
    command: python hec_push.py
    args: 
-    chdir: /opt/splunk/etc/apps/timestamp_app/bin/
+    chdir: /tmp/
