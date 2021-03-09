@@ -24,6 +24,7 @@
     timeout: 90
     return_content: yes
     status_code: 201
+    gather_facts: false
  
 - name: checking if collect search is done
   wait_for: 
