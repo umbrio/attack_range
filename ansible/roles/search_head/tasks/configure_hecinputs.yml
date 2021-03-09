@@ -12,7 +12,7 @@
 - name: copy hec_inputs.conf
   copy:
     src: hec_inputs.conf
-    dest: /opt/etc/apps/splunk_httpinput/local/inputs.conf
+    dest: /opt/splunk/etc/apps/splunk_httpinput/local/inputs.conf
     owner: splunk
     group: splunk
   notify: restart splunk
