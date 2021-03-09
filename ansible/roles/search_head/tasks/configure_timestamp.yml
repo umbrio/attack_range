@@ -33,5 +33,5 @@
 
 #- name: Run HEC push
 #  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
-  args: 
-    executable: /usr/bin/python3 
+#  args: 
+#    executable: /usr/bin/python3 
