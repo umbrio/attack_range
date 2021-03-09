@@ -20,18 +20,18 @@
     password: "{{ splunk_admin_password }}"
     validate_certs: false
     body:
-      search: "savedsearch bots_collect_to_hec_file time=\"{{ ansible_date_time.date }} 09:00\""
+      search: "| savedsearch bots_collect_to_hec_file time=\"2021-03-09 09:00\""
     timeout: 90
     return_content: yes
     status_code: 201
- 
-- name: checking if collect search is done
-  wait_for: 
-    path: /tmp/heccollect.stash_hec
-    timeout: 1200
-    sleep: 10
+     
+#- name: checking if collect search is done
+#  wait_for: 
+#    path: /tmp/heccollect.stash_hec
+#    timeout: 2800
+#    sleep: 10
 
-- name: Run HEC push
-  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
-  args: 
-    executable: /usr/bin/python3 
+#- name: Run HEC push
+#  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
+#  args: 
+#    executable: /usr/bin/python3 
