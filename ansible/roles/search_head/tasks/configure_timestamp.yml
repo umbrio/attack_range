@@ -25,13 +25,13 @@
     return_content: yes
     status_code: 201
      
-#- name: checking if collect search is done
-#  wait_for: 
-#    path: /tmp/heccollect.stash_hec
-#    timeout: 2800
-#    sleep: 10
+- name: checking if collect search is done
+  wait_for: 
+    path: /tmp/heccollect.stash_hec
+    timeout: 2800
+    sleep: 10
 
-#- name: Run HEC push
-#  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
-#  args: 
-#    executable: /usr/bin/python3 
+- name: Run HEC push
+  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
+  args: 
+    executable: /usr/bin/python3 
