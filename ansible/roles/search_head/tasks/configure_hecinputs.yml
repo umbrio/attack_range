@@ -7,7 +7,7 @@
     group: splunk
     recurse: yes
   with_items:
-    - /opt/splunk/etc/apps/splunk_httpinput/local
+    - /opt/splunk/etc/apps/splunk_httpinput/local/
 
 - name: copy hec_inputs.conf
   copy:
