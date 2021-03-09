@@ -34,3 +34,4 @@
 - name: Run HEC push
   command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
   become: yes
+  become_method: su
