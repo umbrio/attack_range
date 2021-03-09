@@ -20,7 +20,7 @@
     password: "{{ splunk_admin_password }}"
     validate_certs: false
     body:
-      search: "\| savedsearch bots_collect_to_hec_file time=\"2021-03-09 09:00\""
+      search: "| savedsearch bots_collect_to_hec_file time=\"2021-03-09 09:00\""
     timeout: 90
     return_content: yes
     status_code: 201
