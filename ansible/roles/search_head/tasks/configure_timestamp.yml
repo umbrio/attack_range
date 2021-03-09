@@ -32,4 +32,6 @@
     sleep: 10
 
 - name: Run HEC push
-  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py 
+  command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
+  become: yes
+  become_user: splunk
