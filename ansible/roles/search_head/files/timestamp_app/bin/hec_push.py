@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from json import loads
 from splunk_http_event_collector import http_event_collector
 
