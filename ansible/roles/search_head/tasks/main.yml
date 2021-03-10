@@ -7,7 +7,6 @@
 - include: configure_indexes.yml
 - include: configure_limits.yml
 - include: configure_web_conf.yml
-- include: configure_timestamp.yml
 - include: configure_server_conf.yml
 #- include: configure_props.yml
 - include: create_serverclass.yml
@@ -22,6 +21,7 @@
   when: splunk_bots_dataset is regex("2a")
 - include: install_botsv3_dataset.yml
   when: splunk_bots_dataset is regex("3")
+- include: configure_timestamp.yml
 - include: install_app_from_s3.yml
   with_items:
     - "{{ splunk_windows_ta }}"

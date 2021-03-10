@@ -1,11 +1,12 @@
-- name: copy savedsearches.conf to splunk server
+- name: copy the timestamp_app to the splunk server
   copy:
     src: timestamp_app
     dest: /opt/splunk/etc/apps/
     owner: splunk
     group: splunk
+    mode: 0750
   register: app_copy
- 
+
 - name: restart splunk
   service: name=splunk state=restarted
   when: app_copy.changed
@@ -20,17 +21,34 @@
     password: "{{ splunk_admin_password }}"
     validate_certs: false
     body:
-      search: "| savedsearch bots_collect_to_hec_file time=\"2021-03-09 09:00\""
+      output_mode: "json"
+      search: |
+        savedsearch bots_collect_to_hec_file time="{{ ansible_date_time.date }} 09:00"
     timeout: 90
     return_content: yes
     status_code: 201
-     
-- name: checking if collect search is done
-  wait_for: 
-    path: /tmp/heccollect.stash_hec
-    timeout: 2800
-    sleep: 10
-    
+  register: job
+
+- name: Wait for the search to be done
+  uri:
+    url: "https://127.0.0.1:8089/services/search/jobs/{{ job.json.sid }}"
+    validate_certs: no
+    method: GET
+    body_format: form-urlencoded
+    user: "admin"
+    password: "{{ splunk_admin_password }}"
+    body:
+      output_mode: "json"
+    timeout: 30
+    return_content: yes
+    status_code: 200
+  register: status
+  until: status.json.entry[0].content.isDone | bool
+  retries: 1000
+
 - name: Run HEC push
-  shell: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
+  command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
+  register: hec_push
   become: yes
+
+- debug: var=hec_push.stdout
