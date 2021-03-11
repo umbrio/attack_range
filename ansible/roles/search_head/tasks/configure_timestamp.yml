@@ -52,7 +52,7 @@
     status_code: 200
   register: status
   until: status.json.entry[0].content.isDone | bool
-  retries: 1000
+  retries: 7000
 
 - name: Run HEC push
   command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
