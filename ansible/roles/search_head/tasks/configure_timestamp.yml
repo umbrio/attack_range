@@ -6,6 +6,14 @@
     group: splunk
     mode: 0750
   register: app_copy
+ 
+- name: copy system_limits.conf to splunk server
+  copy:
+    src: system_limits.conf
+    dest: /opt/splunk/etc/system/local/limits.conf
+    owner: splunk
+    group: splunk
+  notify: restart splunk
 
 - name: restart splunk
   service: name=splunk state=restarted
