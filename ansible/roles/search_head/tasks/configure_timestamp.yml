@@ -20,6 +20,7 @@
   when: app_copy.changed
   become: yes
 
+# Deze task is voor nu niet meer nodig, dataset wordt opgehaald vanuit de S3 bucket. 
 #- name: Run Collect search
 #  uri:
 #    url: "https://127.0.0.1:8089/servicesNS/admin/search/search/jobs"
@@ -54,9 +55,9 @@
 #  until: status.json.entry[0].content.isDone | bool
 #  retries: 7000
 
-#- name: Run HEC push
-#  command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
-#  register: hec_push
-#  become: yes
+- name: Run HEC push
+  command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
+  register: hec_push
+  become: yes
 
 - debug: var=hec_push.stdout
