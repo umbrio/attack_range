@@ -58,7 +58,7 @@
 - name: download Umbrio BOTSv3 dataset
   unarchive:
     src: 'https://umb-bots-data.s3.eu-central-1.amazonaws.com/umb_bots.tgz'
-    dest: /tmp/heccollect.stash_hec 
+    dest: /tmp
     owner: splunk
     group: splunk
     remote_src: yes
