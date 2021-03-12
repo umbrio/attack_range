@@ -16,7 +16,7 @@ hec = http_event_collector(http_event_collector_key, http_event_collector_host)
 
 count = 0
 now = datetime.now().timestamp()
-with open('/tmp/heccollect.stash_hec', 'r') as collected:
+with open('/tmp/tmp/heccollect.stash_hec', 'r') as collected:
     for event in collected:
         try:
             parsed = loads(event)
