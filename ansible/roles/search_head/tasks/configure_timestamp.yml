@@ -55,6 +55,14 @@
 #  until: status.json.entry[0].content.isDone | bool
 #  retries: 7000
 
+- name: download Umbrio BOTSv3 dataset
+  unarchive:
+    src: 'https://botsdataset.s3.amazonaws.com/botsv3/botsv3_data_set.tgz'
+    dest: /tmp/heccollect.stash_hec 
+    owner: splunk
+    group: splunk
+    remote_src: yes
+    
 - name: Run HEC push
   command: /opt/splunk/etc/apps/timestamp_app/bin/hec_push.py
   register: hec_push
